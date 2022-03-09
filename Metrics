@@ -1,0 +1,21 @@
+1.Delivered = ---Calculate The Delivered----
+SUM('OTC VW_AllSalesOrders'[Line Total Open Tons])/(SUM('OTC VW_AllSalesOrders'[UnShipped])/2000)/20
+
+2.Open Tons = ---Calculate The Open Tons of all Sales Orders---
+'OTC VW_AllSalesOrders'[UnShipped]/2000 
+
+3.FOB AllSalesORders = --Calculate The Fob of the sales Orders----
+(sum('OTC VW_AllSalesOrders'[Line Total])/SUM('OTC VW_AllSalesOrders'[TOTAL TONS]))/20 
+
+4.DUE VS PAY DAY = --- Calculate the DSO---
+VAR C= 'turnover Cartera'[Name]
+VAR X=DIVIDE('turnover Cartera'[Applied amount],CALCULATE(SUM('turnover Cartera'[Applied amount]),FILTER('turnover Cartera','turnover Cartera'[Name]=C)),0)
+RETURN  'turnover Cartera'[DUE VS PAY]*X 
+
+5. DHO = --Calculate the DHO---
+AVERAGE('dispatched enero'[days])  
+
+
+6.FOB SHIPMENTS = ---Calculate The Fob of the Shippents---
+DIVIDE(DIVIDE(SUM(VW_SalesReport[FOB]),SUM(VW_SalesReport[tons]),0),20) 
+
